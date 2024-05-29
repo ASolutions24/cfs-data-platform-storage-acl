@@ -31,5 +31,5 @@ stages:
               azureSubscription: ${{ parameters.serviceConnection }}
               ScriptType: 'FilePath'
               ScriptPath: '.\scripts\Manage-Datalake-FileSystem-ACL-Permissions.ps1'
-              ScriptArguments: ${{parameters.environmentName}}
+              ScriptArguments: ${{parameters.env}}
               azurePowerShellVersion: 'LatestVersion'
