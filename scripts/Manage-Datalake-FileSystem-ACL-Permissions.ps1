@@ -1,7 +1,12 @@
-﻿
-Clear-Variable *json*
-Clear-Variable *ACL*
-$json = Get-Content -Raw -Path .\param-file.json | ConvertFrom-Json
+﻿param(
+    [parameter(Mandatory = $true)] [string] $EnvironmentName
+)
+
+#$Environment = Read-Host -Prompt "Enter the environment Name"
+$ParamPath = ".\parameters\" + $EnvironmentName + ".parameters.json"
+
+
+$json = Get-Content -Raw -Path $ParamPath | ConvertFrom-Json
 $json
 Function CreateStorageContainer {
     param(
@@ -320,3 +325,7 @@ ForEach ($storageAccountName in $json) {
         }
     }
 }
+
+Clear-Variable *json*
+Clear-Variable *ACL*
+Write-Host "Cleaning ACL and json variable"
