@@ -14,3 +14,11 @@ steps:
   inputs:
     filePath: '.\scripts\test.ps1'
     arguments: '$(EnvironmentName)'
+
+- task: AzurePowerShell@5
+  inputs:
+    azureSubscription: 'ASHubServiceConnection'
+    ScriptType: 'FilePath'
+    ScriptPath: '.\scripts\test.ps1'
+    ScriptArguments: '$(EnvironmentName)'
+    azurePowerShellVersion: 'LatestVersion'
