@@ -1,0 +1,65 @@
+parameters:
+- name: stageId
+  type: string
+- name: dependsOn
+  type: object
+  default: []
+- name: env
+  type: string
+- name: environmentName
+  type: string
+- name: resourceGroupName
+  type: string
+- name: serviceConnection
+  type: string
+- name: location
+  type: string
+- name: templateFile
+  type: string
+- name: templateParameterFile
+  type: string
+
+
+stages:
+
+- stage:
+  displayName: "Preview Changes to [${{upper(parameters.env)}}] Environment"
+  jobs:
+  - job: Preview
+    steps:
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: ${{ parameters.serviceConnection }}
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az deployment group what-if \
+            --template-file '$(Build.SourcesDirectory)/${{parameters.templateFile}}' \
+            --parameters '$(Build.SourcesDirectory)/${{parameters.templateParameterFile}}' \
+            --resource-group '${{ parameters.resourceGroupName }}'
+
+
+- stage: "${{ parameters.stageId }}"
+  displayName: "Deploying to [${{upper(parameters.env)}}] Environment"
+  dependsOn: ${{ parameters.dependsOn }}
+  jobs:
+  - deployment: Deploy
+    displayName: "Deploying Bicep Template"
+    environment: ${{parameters.environmentName}}
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - checkout: self
+          - task: AzureResourceManagerTemplateDeployment@3
+            inputs:
+              deploymentScope: 'Resource Group'
+              resourceGroupName: ${{ parameters.resourceGroupName }}
+              azureResourceManagerConnection: ${{ parameters.serviceConnection }}
+              action: 'Create Or Update Resource Group'
+              location: ${{ parameters.location }}
+              templateLocation: 'Linked artifact'
+              csmFile: '$(Build.SourcesDirectory)/${{parameters.templateFile}}'
+              csmParametersFile: '$(Build.SourcesDirectory)/${{parameters.templateParameterFile}}'
+              deploymentMode: 'Incremental'
+              deploymentName: 'DeployPipelineTemplate'

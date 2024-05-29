@@ -1,0 +1,48 @@
+[
+    {
+       "resourceGroupName":"WebSiteRG",
+       "storageAccountName": "teststgaccas",
+       "containerName": "wsdata-customeranalytics",
+       "parentFolder":[
+        "HIGHLY PROTECTED",
+        "CUSTOMER AND PERSONAL",
+        "CONFIDENTIAL",
+        "CFS USE ONLY",
+        "PUBLIC"
+       ],
+       "ADGroups":[
+         "SG-BS-HP",
+         "SG-IN-HP",
+         "SG-BS-CP",
+         "SG-IN-CP",
+         "SG-BS-CF",
+         "SG-IN-CF",
+         "SG-BS-CU",
+         "SG-IN-CU",
+         "SG-BS-PB",
+         "SG-IN-PB"
+       ]
+    },
+    {
+        "resourceGroupName":"WebSiteRG",
+        "storageAccountName": "teststgaccas",
+        "containerName": "wsdata-customeranalytics-stg",
+        "parentFolder":[
+         "HIGHLY PROTECTED",
+         "CUSTOMER AND PERSONAL",
+         "CONFIDENTIAL",
+         "CFS USE ONLY",
+         "PUBLIC"
+        ],
+        "ADGroups":[
+          "SG-BS-CP",
+          "SG-IN-CP",
+          "SG-BS-CF",
+          "SG-IN-CF",
+          "SG-BS-CU",
+          "SG-IN-CU",
+          "SG-BS-PB",
+          "SG-IN-PB"
+        ]
+     }
+]

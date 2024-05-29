@@ -1,0 +1,35 @@
+trigger: none
+
+variables:
+- group: cfs-adb-upgrade-hub
+- group: cfs-adb-upgrade-prod
+- name: vmimageName
+  value: "windows-latest"
+
+pool:
+  vmImage: $(vmImageName)
+
+stages:
+
+- template: 'deploy-pipeline.yml'
+  parameters:
+    stageId: "Deploy_to_Hub_Environment"
+    env: "hub"
+    environmentName: "cfs-fwd-hub"
+    resourceGroupName: "rg-sec-dbw-hub"
+    serviceConnection: "ASHubServiceConnection"
+    location: "australiaeast"
+    templateFile: "/main.bicep"
+    templateParameterFile: "parameters/vnetUpgrade-hub.parameters.json"
+
+- template: 'deploy-pipeline.yml'
+  parameters:
+    stageId: "Deploy_to_Prod_Environment"
+    env: "prod"
+    environmentName: $(prod-environment-name)
+    resourceGroupName: $(prod-resource-group-name)
+    serviceConnection: $(prod-service-connection-name)
+    location: "australiaeast"
+    templateFile: "/main.bicep"
+    templateParameterFile: "parameters/vnetUpgrade-prod.parameters.json"
+
