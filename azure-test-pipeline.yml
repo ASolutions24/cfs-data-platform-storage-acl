@@ -1,7 +1,13 @@
 trigger: none
 
+variables:
+- name: vmimageName
+  value: "windows-latest"
+- name: EnvironmentName
+  value: 'dev'
+
 pool:
-  name: Windows-NP
+  vmImage: $(vmImageName)
 
 steps:
 - task: PowerShell@2
@@ -28,7 +34,3 @@ steps:
       nslookup adb-7567496474317359.19.azuredatabricks.net
 
       Test-NetConnection -ComputerName adb-7567496474317359.19.azuredatabricks.net -Port 443
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: "$url = 'https://adb-6362366832116612.12.azuredatabricks.net/api/2.1/unity-catalog/permissions/catalog/fwdp_silverdev?'\n#magic___^_^___line\n$bearer_token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6InEtMjNmYWxldlpoaEQzaG05Q1Fia1A1TVF5VSIsImtpZCI6InEtMjNmYWxldlpoaEQzaG05Q1Fia1A1TVF5VSJ9.eyJhdWQiOiIyZmY4MTRhNi0zMzA0LTRhYjgtODVjYi1jZDBlNmY4NzljMWQiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC81NzRlMTRmZS01NTU4LTQyMTEtYTZhNC04MThiYTgzMDMwMTQvIiwiaWF0IjoxNzEyMDMyNjA4LCJuYmYiOjE3MTIwMzI2MDgsImV4cCI6MTcxMjAzNjUwOCwiYWlvIjoiRTJOZ1lIZ2gvZWlJV2tHbnd6M09oTWl2ZVYvV0FRQT0iLCJhcHBpZCI6ImYxYWJlZDk0LWFlMzAtNDRjYy1iZDU0LTBkM2M4MmVhZTgzOSIsImFwcGlkYWNyIjoiMSIsImdyb3VwcyI6WyJkMjcyNTE0MS1mYzk0LTRiYWMtOGI0NS01Yjg0ODEwOTliMzMiXSwiaWRwIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvNTc0ZTE0ZmUtNTU1OC00MjExLWE2YTQtODE4YmE4MzAzMDE0LyIsIm9pZCI6ImRiMmIwZmYwLTNkZDQtNGVhNS1iODczLWM4YmYxNWY4YzQ2ZSIsInJoIjoiMC5BVUlBX2hST1YxaFZFVUttcElHTHFEQXdGS1lVLUM4RU03aEtoY3ZORG0tSG5CMUNBQUEuIiwic3ViIjoiZGIyYjBmZjAtM2RkNC00ZWE1LWI4NzMtYzhiZjE1ZjhjNDZlIiwidGlkIjoiNTc0ZTE0ZmUtNTU1OC00MjExLWE2YTQtODE4YmE4MzAzMDE0IiwidXRpIjoiYmtUb255X3oxRU92V0NFR3FhUV9BQSIsInZlciI6IjEuMCJ9.43tQK4B-tyCkVk5Jub822iRG5g6M83jkugmfhW_KOmOPy1Xyi1JgAzcigZKJNTZrD8lCfMOz4yyos4v6lSwLORYuYClhG2tv8CHJ_LsxSziFXV4rUZYmkY63S8safRzaP9OOZc4MdCTgQJv_Kmvat1GftBFhUj5kB7iVsqGQv-zbNNpdV_gbQYMLTt-rBlXSxQfS-wErSA8moaW99nVoTTXZ3fOHpkQTtYxkc6FPcNXZbVeGTfYh9HChBNAdbtNi8nzoexX83cA62VvFD4Eo_ya91r1sErzcRnu3vlF4TjGXgw6Ygy9RqCxB_Un0xgAE5-NpmmHukGXONoRWYW6MYw'\n$headers = @{Authorization = \"Bearer $bearer_token\"} \n$response = Invoke-WebRequest -Uri $url -Headers $headers -UseBasicParsing\n$response\n"
