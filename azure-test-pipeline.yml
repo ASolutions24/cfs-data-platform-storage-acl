@@ -13,7 +13,7 @@ steps:
 
 - task: AzurePowerShell@5
   inputs:
-    azureSubscription: 'ASHubServiceConnection'
+    azureSubscription: 'HubServiceConnection'
     ScriptType: 'FilePath'
     ScriptPath: '.\scripts\Manage-Datalake-FileSystem-ACL-Permissions.ps1'
     ScriptArguments: '$(EnvironmentName)'
