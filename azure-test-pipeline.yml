@@ -10,15 +10,11 @@ pool:
   vmImage: $(vmImageName)
 
 steps:
-- task: PowerShell@2
-  inputs:
-    filePath: '.\scripts\test.ps1'
-    arguments: '$(EnvironmentName)'
 
 - task: AzurePowerShell@5
   inputs:
     azureSubscription: 'ASHubServiceConnection'
     ScriptType: 'FilePath'
-    ScriptPath: '.\scripts\test.ps1'
+    ScriptPath: '.\scripts\Manage-Datalake-FileSystem-ACL-Permissions.ps1'
     ScriptArguments: '$(EnvironmentName)'
     azurePowerShellVersion: 'LatestVersion'
