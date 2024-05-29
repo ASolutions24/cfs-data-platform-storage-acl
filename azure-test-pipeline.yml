@@ -12,25 +12,5 @@ pool:
 steps:
 - task: PowerShell@2
   inputs:
-    targetType: 'inline'
-    script: |
-      # Write your PowerShell commands here.
-
-      ipconfig /flushdns
-
-      ipconfig /all
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: |
-      nslookup adb-6362366832116612.12.azuredatabricks.net
-
-      Test-NetConnection -ComputerName adb-6362366832116612.12.azuredatabricks.net -Port 443
-
-      nslookup adb-8599333942969221.1.azuredatabricks.net
-
-      Test-NetConnection -ComputerName adb-8599333942969221.1.azuredatabricks.net -Port 443
-
-      nslookup adb-7567496474317359.19.azuredatabricks.net
-
-      Test-NetConnection -ComputerName adb-7567496474317359.19.azuredatabricks.net -Port 443
+    filePath: '.\scripts\test.ps1'
+    arguments: '$(EnvironmentName)'
