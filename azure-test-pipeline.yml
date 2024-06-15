@@ -15,6 +15,6 @@ steps:
   inputs:
     azureSubscription: 'HubServiceConnection'
     ScriptType: 'FilePath'
-    ScriptPath: '.\scripts\Manage-Datalake-FileSystem-ACL-Permissions.ps1'
+    ScriptPath: '.\scripts\test.ps1'
     ScriptArguments: '$(EnvironmentName)'
     azurePowerShellVersion: 'LatestVersion'
