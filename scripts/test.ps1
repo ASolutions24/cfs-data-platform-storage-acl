@@ -12,4 +12,4 @@ $json
 Write-Host "Getting Azure AD Group"
 Get-AzADGroup -DisplayName "SG-IN-HP"
 
-Get-Module -ListAvailable
+Get-Module -ListAvailable | Format-Table
