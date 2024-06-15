@@ -5,7 +5,7 @@ variables:
   value: "windows-latest"
 
 pool:
-  vmImage: $(vmImageName)
+   name: Default
 
 stages:
 
