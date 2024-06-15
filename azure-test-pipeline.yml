@@ -7,7 +7,7 @@ variables:
   value: 'dev'
 
 pool:
-  vmImage: $(vmImageName)
+  - name: "Default"
 
 steps:
 
