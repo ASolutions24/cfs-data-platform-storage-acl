@@ -1,13 +1,13 @@
 trigger: none
 
 variables:
-- name: vmimageName
+- name: Default
   value: "windows-latest"
 - name: EnvironmentName
   value: 'dev'
 
 pool:
-  - name: "Default"
+  - name: $(Default)
 
 steps:
 
